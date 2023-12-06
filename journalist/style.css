@@ -1,0 +1,116 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background: url('background-image.jpg') center center fixed;
+    background-size: cover;
+    position: relative;
+    color: #fff;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.container {
+    margin-top: 50px;
+    z-index: 1;
+    position: relative;
+}
+
+h1, .btn, p {
+    color: rgba(75, 74, 74, 0.99);
+}
+
+.btn-primary,
+.btn-info,
+.btn-success {
+    padding: 15px 30px;
+    font-size: 18px;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+.text-danger {
+    color: #ff0000;
+    font-weight: bold;
+    font-style: italic;
+    text-shadow: 2px 2px 4px rgba(250, 250, 250, 0.8);
+}
+/*Login*/
+body {
+    background-color: #f8f9fa; /* Fundal gri deschis */
+    font-family: 'Arial', sans-serif;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+.login-card {
+    background-color: #ffffff; /* Fundal alb */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1); /* Ușoară umbră */
+}
+
+.login-title {
+    text-align: center;
+    color: #007bff; /* Albastru deschis pentru titlu */
+}
+
+.login-form {
+    margin-top: 20px;
+}
+
+.login-label {
+    display: block;
+    margin-bottom: 8px;
+    color: #555555; /* Culoare gri pentru etichete */
+}
+
+.login-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ced4da; /* Bordură subțire gri */
+    border-radius: 4px;
+}
+
+.login-button {
+    background-color: #007bff; /* Albastru deschis pentru buton */
+    color: #ffffff; /* Text alb pentru buton */
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Tranziție culoare la hover */
+}
+
+.login-button:hover {
+    background-color: #0056b3; /* Albastru mai închis la hover */
+}
+
+.login-error {
+    color: #fd1c1c; /* Culoare roșie pentru mesaje de eroare */
+}
+
+
+

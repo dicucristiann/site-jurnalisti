@@ -1,35 +1,34 @@
 <?php
-include('conexiune.php');
+require_once 'conexiune.php';
 
-$username = '';
-$password = '';
-$errorMessage = '';
+// Select DB
+$databaseName = 'articole';
+$GLOBALS['conn']->select_db($databaseName);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    //validation
-    if (empty($username) || empty($password)) {
-        $errorMessage = 'Please enter both username and password.';
-    } else {
-        // authentication
-        $sql = "SELECT * FROM utilizatori WHERE user = '$username' AND parola = '$password'";
-        $result = $GLOBALS['conn']->query($sql);
-
-        //check if successful
-        if ($result && $result->num_rows > 0) {
-            $user = $result->fetch_assoc();
-            $userRole = $user['rol']; // get the user's role
-
-            // redirect to index.php with user role as query
-            header("Location: index.php?role=$userRole");
-            exit();
-        } else {
-            $errorMessage = 'Invalid username or password.';
-        }
-    }
+// Check connection
+if ($GLOBALS['conn']->connect_error) {
+    die("Connection failed: " . $GLOBALS['conn']->connect_error);
 }
+
+// Retrieve data from the HTML form
+$username = isset($_POST['username']) ? $_POST['username'] : '';
+$password = isset($_POST['password']) ? $_POST['password'] : '';
+
+// Authentication
+$sql = "SELECT * FROM utilizatori WHERE user = '$username' AND parola = '$password'";
+$result = $GLOBALS['conn']->query($sql);
+
+// Process authentication results
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        // Authentication successful, process user data if necessary
+        echo "Authentication successful for user: " . $row['user'];
+    }
+} else {
+    // Authentication failed err
+    echo "Authentication failed. Incorrect username and/or password.";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -38,24 +37,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+<div class="login-container">
+    <div class="login-card">
+        <h1 class="login-title h4 mb-0">Login</h1>
+        <form class="login-form" method="post" action="login.php">
+            <div class="form-group">
+                <label class="login-label" for="username">Username:</label>
+                <input type="text" class="login-input form-control" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>" required>
+            </div>
 
-<h1>Login</h1>
+            <div class="form-group">
+                <label class="login-label" for="password">Password:</label>
+                <input type="password" class="login-input form-control" id="password" name="password" required>
+            </div>
 
-<form method="post" action="login.php">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>" required>
-    <br>
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-    <br>
-
-    <button type="submit">Login</button>
-</form>
-
-<p style="color: red;"><?php echo $errorMessage; ?></p>
+            <button type="submit" class="login-button btn btn-primary btn-block">Login</button>
+        </form>
+        <p class="login-error mt-3"><?php echo mysqli_error($GLOBALS['conn']); ?></p>
+    </div>
+</div>
 
 </body>
 </html>
+
+<?php
+// Close the connection when done
+$GLOBALS['conn']->close();
+?>

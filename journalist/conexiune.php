@@ -1,13 +1,17 @@
 <?php
+// conexiune.php
+
 $servername = "localhost";
-$port = "8081";
 $username = "root";
 $password = "";
 $database = "articole";
 
-$GLOBALS['conn'] = new mysqli($servername, $username, $password);
+// Crearea conexiunii
+$GLOBALS['conn'] = new mysqli($servername, $username, $password, $database);
 
+// Verificarea conexiunii
 if ($GLOBALS['conn']->connect_error) {
-    die("Nu se poate conecta la bd: " . $GLOBALS['conn']->connect_error);
+    die("Connection failed: " . $GLOBALS['conn']->connect_error);
 }
+
 ?>

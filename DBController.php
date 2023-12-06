@@ -1,4 +1,4 @@
-<?php
+<?php //! Asta cred ca trebuie sters!
 class DBController
 {
     public $host = "localhost";
