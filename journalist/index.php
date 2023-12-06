@@ -1,5 +1,10 @@
 <?php
+include ('login.php');
 include('conexiune.php');
+
+// Select the database
+$databaseName = 'articole';
+$GLOBALS['conn']->select_db($databaseName);
 
 //get role from query parameter
 $userRole = isset($_GET['role']) ? $_GET['role'] : '';

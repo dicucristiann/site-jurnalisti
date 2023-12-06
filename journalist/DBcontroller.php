@@ -2,7 +2,7 @@
 $hostname = "localhost";
 $port = "8081";
 $username = "root";
-$password = " ";
+$password = "";
 $database = "articole";
 
 // Conexiune la serverul MySQL
