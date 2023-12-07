@@ -98,7 +98,76 @@ class ArticleManager {
 
         return $articles;
     }
+    public function getArticlesByCategory($userId, $category)
+    {
+        $articles = [];
 
+        $stmt = $this->db->prepare("SELECT id, title, content, category, author_id, status, status_message FROM articles WHERE author_id = ? AND category = ?");
+        $stmt->bind_param("is", $userId, $category);
+
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+
+            while ($row = $result->fetch_assoc()) {
+                $articles[] = new Article(
+                    $row['id'],
+                    $row['title'],
+                    $row['content'],
+                    $row['category'],
+                    $row['author_id'],
+                    $row['status'],
+                    $row['status_message']
+                );
+            }
+        }
+
+        $stmt->close();
+
+        return $articles;
+    }
+
+    public function getMyArticlesByCategory($userId, $category)
+    {
+        $articles = [];
+        $newCategory = $category=== 'IS NOT NULL' ? `category` : $category;
+
+        $sql = "SELECT id, title, content, category, author_id, status, status_message FROM articles WHERE author_id = ?";
+
+        // Check if $category is not "all" to add the category condition
+        if ($category !== "all") {
+            $sql .= " AND category = ?";
+        }
+        $stmt = $this->db->prepare($sql);
+
+
+
+        // Bind parameters
+        if ($category !== "all") {
+            $stmt->bind_param("is", $userId, $category);
+        } else {
+            $stmt->bind_param("i", $userId);
+        }
+
+        if ($stmt->execute()) {
+            $result = $stmt->get_result();
+
+            while ($row = $result->fetch_assoc()) {
+                $articles[] = new Article(
+                    $row['id'],
+                    $row['title'],
+                    $row['content'],
+                    $row['category'],
+                    $row['author_id'],
+                    $row['status'],
+                    $row['status_message']
+                );
+            }
+        }
+
+        $stmt->close();
+
+        return $articles;
+    }
     public function updateArticleStatus($articleId, $status, $statusMessage)
     {
         $stmt = $this->db->prepare("UPDATE articles SET status = ?, status_message = ? WHERE id = ?");

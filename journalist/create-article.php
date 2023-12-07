@@ -59,9 +59,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="mb-3">
                         <label for="category" class="form-label">Category:</label>
                         <select class="form-select" id="category" name="category" required>
-                            <option value="technology">Technology</option>
+                            <option value="artistic">Artistic</option>
+                            <option value="technic">Technic</option>
                             <option value="science">Science</option>
-                            <option value="business">Business</option>
+                            <option value="moda">Moda</option>
                             <!-- Add more options as needed -->
                         </select>
                     </div>

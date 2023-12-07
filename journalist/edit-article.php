@@ -86,7 +86,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
         <div class="form-group">
             <label for="category">Category:</label>
-            <input type="text" class="form-control" id="category" name="category" value="<?php echo htmlspecialchars($article->getCategory()); ?>" required>
+            <select class="form-select" id="category" name="category" value="<?php echo htmlspecialchars($article->getCategory()); ?>" required>
+                <option value="artistic">Artistic</option>
+                <option value="technic">Technic</option>
+                <option value="science">Science</option>
+                <option value="moda">Moda</option>
+                <!-- Add more options as needed -->
+            </select>
         </div>
         <button type="submit" class="btn btn-primary">Update Article</button>
     </form>
