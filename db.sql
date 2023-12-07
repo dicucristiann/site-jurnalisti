@@ -9,10 +9,12 @@ CREATE TABLE users (
 CREATE TABLE articles (
     id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,
-    user_id INT NOT NULL,
+    author_id INT NOT NULL,
     content TEXT NOT NULL,
     category VARCHAR(50) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    status ENUM('waiting', 'approved', 'rejected') DEFAULT 'waiting',
+    status_message TEXT,
+    FOREIGN KEY (author_id) REFERENCES users(id)
 )
 

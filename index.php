@@ -25,7 +25,7 @@ $articleManager = new ArticleManager($mysqli);
     <h1 class="my-5">Hi, Welcome to our site.</h1>
     <div>
         <ul>
-            <?php foreach ($articleManager->getAllArticles() as $article): ?>
+            <?php foreach ($articleManager->getApprovedArticles() as $article): ?>
                 <li>
                     <h2><?php echo $article->getTitle(); ?></h2>
                     <p><?php echo $article->getContent(); ?></p>
