@@ -18,9 +18,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     exit;
 }
 
-
 $articleManager = new ArticleManager($mysqli);
-
 
 ?>
 
@@ -48,8 +46,8 @@ $articleManager = new ArticleManager($mysqli);
 </div>
 <p>
     <a href="create-article.php" class="btn btn-primary">Add article</a>
-    <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
-    <a href="logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>
+    <a href="../reset-password.php" class="btn btn-warning">Reset Your Password</a>
+    <a href="../logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>
 
 </p>
 </body>

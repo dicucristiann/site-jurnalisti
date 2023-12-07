@@ -23,8 +23,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Create the article
         if ($articleManager->createArticle($title, $content, $user_id, $category)) {
-            // Redirect to home.php
-            header("Location: home.php");
+            // Redirect to index.php
+            header("Location: index.php");
             exit();
         } else {
             echo "Error creating article";

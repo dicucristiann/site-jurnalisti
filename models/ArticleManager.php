@@ -1,5 +1,5 @@
 <?php
-namespace models;
+require_once "Article.php";
 
 class ArticleManager {
     private $db;

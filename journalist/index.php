@@ -1,21 +1,22 @@
 <?php
-include ('login.php');// partea asta nu functioneaza si trebuie modificat in css cate ceva
-include('conexiune.php');
-// Select the database
-$databaseName = 'articole';
-$GLOBALS['conn']->select_db($databaseName);
 
-//get role from query parameter
-$userRole = isset($_GET['role']) ? $_GET['role'] : '';
+require_once "../config.php";
+require_once "../models/ArticleManager.php";
+require_once "../models/Article.php";
 
-$sql = "SELECT * FROM utilizatori WHERE rol = '$userRole'";
-$result = $GLOBALS['conn']->query($sql);
+ini_set('display_startup_errors',1);
+ini_set('display_errors',1);
+// Initialize the session
 
-if ($result && $result->num_rows > 0) {
-    $user = $result->fetch_assoc();
-} else {
-    $errorMessage = 'Invalid user role.';
+session_start();
+
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
 }
+
+$articleManager = new ArticleManager($mysqli);
 
 ?>
 
@@ -23,51 +24,33 @@ if ($result && $result->num_rows > 0) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Site Jurnalisti</title>
-    <!-- Include Bootstrap CSS and JS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- Link to the separate CSS file -->
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body{ font: 14px sans-serif; text-align: center; }
+    </style>
 </head>
 <body>
-
-<!--<div class="overlay"></div>-->
-
-<div class="container" >
-    <div class="jumbotron text-center">
-        <h1 class="display-4">Welcome, <?php echo isset($user['nume']) ? $user['nume'] : 'Guest'; ?>!</h1>
-    </div>
-
-    <?php if ($userRole === 'jurnalist'): ?>
-        <button class="btn btn-success mr-2" onclick="writeArticle()">Write Article</button>
-        <button class="btn btn-info" onclick="readArticles()">Read Article</button>
-    <?php elseif ($userRole === 'editor'): ?>
-        <button class="btn btn-primary mr-2" onclick="validateArticle()">Validate Article</button>
-        <button class="btn btn-info" onclick="readArticles()">Read Article</button>
-    <?php elseif ($userRole === 'cititor'): ?>
-        <button class="btn btn-info" onclick="readArticles()">Read Article</button>
-    <?php else: ?>
-        <p class="text-danger">Unknown role</p>
-    <?php endif; ?>
+<h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
+<div>
+    <ul>
+        <?php foreach ($articleManager->getAllArticles() as $article): ?>
+            <li>
+                <h2><?php echo $article->getTitle(); ?></h2>
+                <p><?php echo $article->getContent(); ?></p>
+            </li>
+        <?php endforeach; ?>
+    </ul>
 </div>
+<p>
+    <a href="create-article.php" class="btn btn-primary">Add article</a>
+    <a href="../reset-password.php" class="btn btn-warning">Reset Your Password</a>
+    <a href="../logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>
 
-<script>
-    function writeArticle() {
-        alert('Write article!');
-    }
-
-    function validateArticle() {
-        alert('Validate article!');
-    }
-
-    function readArticles() {
-        alert('Read article!');
-    }
-</script>
-
+</p>
 </body>
 </html>
+<?php
+// Close the database connection
+$mysqli->close();
+?>
