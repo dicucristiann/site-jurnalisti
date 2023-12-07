@@ -15,3 +15,4 @@ CREATE TABLE articles (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
 )
+

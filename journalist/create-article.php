@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!empty($title) && !empty($content) && !empty($category)) {
         // Get user_id from session (replace this with your actual session handling)
-        $user_id = $_SESSION['id'];
+        $user_id = $_SESSION['user_id'];
 
         // Create the article
         if ($articleManager->createArticle($title, $content, $user_id, $category)) {
