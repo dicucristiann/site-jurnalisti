@@ -1,18 +1,28 @@
 <?php
 // Initialize the session
-session_start();
 
 ini_set('display_startup_errors',1);
 ini_set('display_errors',1);
 
 require_once "models/UserManager.php";
+require_once "models/User.php";
+
 // Include config file
 require_once "config.php";
+session_start();
 
 // Processing form data when form is submitted
 // Check if the user is already logged in, redirect to index.php if true
-if (isset($_SESSION["user"]) && !empty($_SESSION["user"])) {
-    header("location: index.php");
+if (!empty($_SESSION["user_id"])) {
+    $role = $_SESSION["role"];
+    if ($role === "journalist") {
+        header("location: journalist/index.php");
+    } elseif ($role === "editor") {
+        header("location: editor/index.php");
+    } else {
+        // Redirect to a default page if the role is not recognized
+        header("location: index.php");
+    }
     exit();
 }
 
@@ -45,14 +55,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($user) {
             // Store the user object in the session
-            $_SESSION["user"] = $user;
+            $_SESSION["username"] = $user->getUsername();
+            $_SESSION["role"] = $user->getRole();
+            $_SESSION["user_id"] = $user->getId();
+
 
             // Redirect to index.php
             // Redirect based on the user's role
             if ($user->getRole() === "journalist") {
-                header("location: journalist/home");
+                header("location: journalist/index.php");
             } elseif ($user->getRole() === "editor") {
-                header("location: editor/home");
+                header("location: editor/index.php");
             } else {
                 // Redirect to a default page if the role is not recognized
                 header("location: index.php");

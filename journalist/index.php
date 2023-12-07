@@ -4,15 +4,13 @@ require_once "../config.php";
 require_once "../models/ArticleManager.php";
 require_once "../models/Article.php";
 
-ini_set('display_startup_errors',1);
-ini_set('display_errors',1);
-// Initialize the session
 
+// Initialize the session
 session_start();
 
 // Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
+if(empty($_SESSION["user_id"])){
+    header("location: ../login.php");
     exit;
 }
 
@@ -20,7 +18,6 @@ $articleManager = new ArticleManager($mysqli);
 
 ?>
 
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

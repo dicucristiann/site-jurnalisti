@@ -1,9 +1,8 @@
 <?php
 
-use models\ArticleManager;
 
-require_once "config.php";
-require_once "models/ArticleManager.php";
+require_once "../config.php";
+require_once "../models/ArticleManager.php";
 
 session_start();
 

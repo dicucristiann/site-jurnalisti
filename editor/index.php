@@ -1,10 +1,9 @@
 <?php
 
-use models\ArticleManager;
 
-require_once "config.php";
-require_once "models/ArticleManager.php";
-require_once "models/Article.php";
+require_once "../config.php";
+require_once "../models/ArticleManager.php";
+require_once "../models/Article.php";
 
 ini_set('display_startup_errors',1);
 ini_set('display_errors',1);
@@ -13,8 +12,8 @@ ini_set('display_errors',1);
 session_start();
 
 // Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: login.php");
+if(empty($_SESSION["user_id"])){
+    header("location: ../login.php");
     exit;
 }
 
@@ -33,7 +32,7 @@ $articleManager = new ArticleManager($mysqli);
     </style>
 </head>
 <body>
-<h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome to our site.</h1>
+<h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome Editor</h1>
 <div>
     <ul>
         <?php foreach ($articleManager->getAllArticles() as $article): ?>
@@ -45,7 +44,7 @@ $articleManager = new ArticleManager($mysqli);
     </ul>
 </div>
 <p>
-    <a href="create-article.php" class="btn btn-primary">Add article</a>
+    <a href="../journalist/create-article.php" class="btn btn-primary">Add article</a>
     <a href="../reset-password.php" class="btn btn-warning">Reset Your Password</a>
     <a href="../logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>
 
