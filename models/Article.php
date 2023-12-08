@@ -9,7 +9,7 @@ class Article {
     private $category;
     private $status;
     private $statusMessage;
-
+    //TODO: add publishedAtDate for the article and sort by it
     public function __construct($id, $title, $content,  $category, $author_id, $status, $statusMessage) {
         $this->id = $id;
         $this->title = $title;
