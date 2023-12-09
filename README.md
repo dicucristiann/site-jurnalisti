@@ -12,7 +12,7 @@ Proiectul nostru se concentrează pe proiectarea și dezvoltarea unui site web �
 
 ## Captură de ecran
 
-![Captură de ecran](link_captura_screenshot.png)
+![Captură de ecran](welcome-screen.png)
 
 ## Cum să rulezi proiectul
 
