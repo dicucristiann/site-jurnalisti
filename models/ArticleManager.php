@@ -64,11 +64,17 @@ class ArticleManager {
     }
 
     public function updateArticle($article) {
-        $sql = "UPDATE articles SET title=?, content=?, category=?, status='waiting', status_message=NULL WHERE id=?";
+        $sql = "UPDATE articles SET title=?, content=?, category=?, status=?, status_message=NULL WHERE id=?";
         $stmt = $this->db->prepare($sql);
 
         if ($stmt) {
-            $stmt->bind_param("sssi", $article->getTitle(), $article->getContent(), $article->getCategory(), $article->getId());
+            $status = 'waiting';
+            $title = $article->getTitle();
+            $content = $article->getContent();
+            $category = $article->getCategory();
+            $articleId = $article->getId();
+
+            $stmt->bind_param("ssssi", $title, $content, $category, $status, $articleId);
             $stmt->execute();
             $stmt->close();
         }

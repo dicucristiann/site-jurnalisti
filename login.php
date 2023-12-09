@@ -1,6 +1,7 @@
 <?php
 // Initialize the session
 
+global $mysqli;
 ini_set('display_startup_errors',1);
 ini_set('display_errors',1);
 
@@ -84,11 +85,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <style>
-        body{ font: 14px sans-serif; }
-        .wrapper{ width: 360px; padding: 20px; }
-    </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"> <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <div class="wrapper">
@@ -113,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <span class="invalid-feedback"><?php echo $password_err; ?></span>
         </div>
         <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Login">
+            <input type="submit" class="btn btn-secondary" value="Login">
         </div>
         <p>Don't have an account? <a href="register.php">Sign up now</a>.</p>
     </form>

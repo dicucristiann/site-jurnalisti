@@ -1,0 +1,178 @@
+/* Welcome page */
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('https://uswalldecor.com/cdn/shop/products/MH1509-Magnolia-Home-The-Daily-Newspaper-Wallpaper-Yellow-Gray.jpg?v=1571709013&width=1946');
+}
+
+
+.container {
+    text-align: center;
+    color: #fff;
+    background: #333;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+
+.header {
+    margin-bottom: 20px;
+}
+
+.article-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.article {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.glow-on-hover {
+    width: 220px;
+    height: 50px;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #111;
+    cursor: pointer;
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.glow-on-hover:before {
+    content: '';
+    background: linear-gradient(45deg, #ffffff, #5b5a5a, #98d3b6, #0056b3, #0080ff,#ffffff, #0056b3, #0080ff,#ffffff);
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    background-size: 400%;
+    z-index: -1;
+    filter: blur(5px);
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    animation: glowing 20s linear infinite;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    border-radius: 10px;
+}
+
+.glow-on-hover:active {
+    color: #000
+}
+
+.glow-on-hover:active:after {
+    background: transparent;
+}
+
+.glow-on-hover:hover:before {
+    opacity: 1;
+}
+
+.glow-on-hover:after {
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #111;
+    left: 0;
+    top: 0;
+    border-radius: 10px;
+}
+
+@keyframes glowing {
+    0% { background-position: 0 0; }
+    50% { background-position: 400% 0; }
+    100% { background-position: 0 0; }
+}
+
+/* Adjustments for better responsiveness */
+@media (max-width: 768px) {
+    body {
+        background-position: top;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .article-container {
+        max-width: 100%;
+    }
+
+    .glow-on-hover {
+        width: 100%;
+    }
+}
+
+/*Login form*/
+.wrapper {
+    width: 360px;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin: 50px auto;
+}
+
+.wrapper h2 {
+    text-align: center;
+    color: #007bff;
+}
+
+.wrapper p {
+    text-align: center;
+    color: #6c757d;
+}
+
+.alert {
+    margin-top: 10px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    color: #495057;
+}
+
+input.form-control {
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+}
+
+.btn-secondary{
+    background-color: #007bff;
+    border: 1px solid #007bff;
+}
+
+.btn-secondary:hover {
+    background-color: #0056b3;
+    border: 1px solid #0056b3;
+}
+
+a {
+    color: #007bff;
+}
+
+a:hover {
+    color: #0056b3;
+}

@@ -1,6 +1,7 @@
 <?php
 
 
+global $mysqli;
 require_once "../config.php";
 require_once "../models/ArticleManager.php";
 require_once "../models/Article.php";
@@ -26,6 +27,7 @@ $articleManager = new ArticleManager($mysqli);
         <meta charset="UTF-8">
         <title>Welcome</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../journalist/style.css">
         <style>
             body { font: 14px sans-serif; text-align: center; }
             h1 { margin-top: 50px; }
@@ -34,8 +36,15 @@ $articleManager = new ArticleManager($mysqli);
         </style>
     </head>
     <body>
+
     <div class="container">
         <h1 class="my-5">Hi, <b><?php echo htmlspecialchars($_SESSION["username"]); ?></b>. Welcome Editor</h1>
+
+        <div class="action-buttons">
+            <a href="../journalist/create-article.php" class="btn btn-primary">Adaugă articol</a>
+            <a href="../reset-password.php" class="btn btn-warning">Resetează parola</a>
+            <a href="../logout.php" class="btn btn-danger">Deconectează-te</a>
+        </div>
 
         <ul>
             <?php foreach ($articleManager->getAllArticles() as $article): ?>
@@ -49,12 +58,6 @@ $articleManager = new ArticleManager($mysqli);
                 </li>
             <?php endforeach; ?>
         </ul>
-
-        <p>
-            <a href="../journalist/create-article.php" class="btn btn-primary">Add article</a>
-            <a href="../reset-password.php" class="btn btn-warning">Reset Your Password</a>
-            <a href="../logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>
-        </p>
     </div>
     </body>
     </html>
