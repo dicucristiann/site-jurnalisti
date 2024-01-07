@@ -1,8 +1,6 @@
 # Proiect: Proiectarea și Realizarea Site-urilor Web
 
-Bine ați venit în proiectul pentru materia "<p>Proiectare și Realizare a site-urilor Web!"</p>
-<br>
-Acest proiect a fost dezvoltat de către:
+<b>Acest proiect a fost dezvoltat de către:</b>
 - **Dicu Cristian**
 
 ## Descriere
