@@ -1,10 +1,9 @@
 # Proiect: Proiectarea și Realizarea Site-urilor Web
 
-Bine ați venit în proiectul nostru de proiectare și realizare a site-urilor web! Acest proiect a fost dezvoltat de către studenții:
-
-- **Andrei Dorobantu**
+Bine ați venit în proiectul pentru materia "<p>Proiectare și Realizare a site-urilor Web!"</p>
+<br>
+Acest proiect a fost dezvoltat de către:
 - **Dicu Cristian**
-- **Cosmina Dulamita (Kondora)**
 
 ## Descriere
 
